@@ -10,7 +10,7 @@ import { getAllCarts,
 
 const saveCarts = async (req, res) => {
     try {
-            const carts = getAllCarts();
+            const carts = await getAllCarts();
             // Productos que haremos con Postman
             const cart = req.body;
 
@@ -25,7 +25,7 @@ const saveCarts = async (req, res) => {
                     });
             }
 
-            saveCart(cart);
+            await saveCart(cart);
 
             // status success
             return res.send({
@@ -52,7 +52,7 @@ const saveProductOnCart = async (req, res) => {
 
 
         // Obtener el carrito por su ID
-        const cart = cartById({_id: cid});
+        const cart = await cartById({_id: cid});
 
         if (!cart) {
             return res.status(404).json({
@@ -81,7 +81,7 @@ const saveProductOnCart = async (req, res) => {
         }
 
         // Actualiza el carrito con los cambios
-        cartUpdate(cid, cart);
+        await cartUpdate(cid, cart);
 
         // Respuesta exitosa
         return res.send({
@@ -105,13 +105,13 @@ const deleteCartProducts = async (req, res) => {
 
             //carrito por ID
 
-            const cart = CartById(cid);
+            const cart = await CartById(cid);
 
             // Elimina todos los productos dentro del carrito
             cart.products = [];
 
             // Guarda la actualización del carrito en la base de datos
-            cartUpdate(cid, cart);
+            await cartUpdate(cid, cart);
 
             res.send({
                     status: 'success',
@@ -136,7 +136,7 @@ const deleteCartProductById = async (req, res) => {
 
     
             // Obtener el carrito por su ID
-            const cart = cartById({_id: cid});
+            const cart = await cartById({_id: cid});
 
             console.log(cart);
             if (!cart) {
@@ -159,7 +159,7 @@ const deleteCartProductById = async (req, res) => {
 
     
             // Actualiza el carrito con los cambios
-            cartUpdate(cid, cart);
+            await cartUpdate(cid, cart);
     
             // Respuesta exitosa
             return res.send({
@@ -184,7 +184,7 @@ const updateCart = async (req, res) => {
         const updatedCartData = req.body;
 
         // Actualiza el carrito con los cambios proporcionados
-        const updatedCart = cartUpdate(cid, updatedCartData);
+        const updatedCart = await cartUpdate(cid, updatedCartData);
         console.log(updatedCart)
         // Comprueba si el carrito se actualizó correctamente
         if (updatedCart) {
@@ -222,7 +222,7 @@ const updateCartProduct = async (req, res) => {
 
             //carrito por ID
 
-            const cart = cartById({_id: cid});
+            const cart = await cartById({_id: cid});
 
             if (!cart) {
                     return res.status(404).json({
@@ -255,7 +255,7 @@ const updateCartProduct = async (req, res) => {
             }
 
             // Actualiza el carrito con los cambios
-            cartUpdate(cid, cart);
+            await cartUpdate(cid, cart);
 
             // status success
             return res.send({
@@ -296,7 +296,7 @@ const getSpecificCart = async (req, res) => {
                     cid
             } = req.params;
 
-            const cart = cartById(cid);
+            const cart = await cartById(cid);
 
             if (!cart) {
                     return res.status(404).json({
