@@ -2,7 +2,7 @@ import { cartsModel } from "./models/carts.models.js";
 
 export default class Carts {
     constructor(){
-        console.log("db trabajando")
+        console.log("db trabajando en carts")
     }
 
     getAll = async () => {
