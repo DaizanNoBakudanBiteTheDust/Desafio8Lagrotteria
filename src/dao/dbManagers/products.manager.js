@@ -4,7 +4,7 @@ import {
 
 export default class Products {
     constructor() {
-        console.log("db trabajando")
+        console.log("db trabajando ej products")
     }
 
     getAll = async (req) => {
