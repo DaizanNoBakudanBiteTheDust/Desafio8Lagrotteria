@@ -3,21 +3,25 @@ import { __dirname } from './utils.js';
 import dotenv from 'dotenv';
 import { Command } from 'commander';
 
-
 const program = new Command();
-
-program.option('--mode <modo>', 'variable de ambiente');
+// CREO ESTO NO ES NECESARIO LO DE VARIANTE DE AMBIENTE
+program.option('variable de ambiente');
 program.parse();
 
+//PATH AL ENV
 
-dotenv.config({ path: path.resolve(__dirname, '.env') });
+const envPath = path.resolve(__dirname, '.env');
 
+dotenv.config({ path: envPath });
+
+// ENVS
 const configs = {
     port: process.env.PORT,
-    mongoUrl: process.env.MONGO_URL
+    mongoUrl: process.env.MONGO_URL,
+    secretCookie: process.env.SECRET_COOKIE,
+    privateHash: process.env.PRIVATE_KEY_HASH,
+    privateJwt: process.env.PRIVATE_KEY_JWT
 };
 
-console.log('El valor de MONGO_URL es:', process.env.PORT);
-console.log('El valor de MONGO_URL es:', process.env.MONGO_URL);
 
 export default configs;

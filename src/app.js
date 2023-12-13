@@ -11,12 +11,13 @@ import fileStore from 'session-file-store';
 import MongoStore from 'connect-mongo';
 import passport from 'passport';
 
-//dependencias de ruta
 
+//dependencias de ruta
 import {
         __dirname
 }
 from './utils.js';
+import configs from "./config.js";
 import { initializePassport } from './config/passport.config.js';
 import productRouter from './routes/api/products.router.js';
 import cartRouter from './routes/api/cart.router.js';
@@ -30,7 +31,6 @@ import viewsRouter from './routes/web/views.router.js';
 import Products from './dao/dbManagers/products.manager.js';
 import Carts from './dao/dbManagers/cart.manager.js';
 import Messages from './dao/dbManagers/message.manager.js';
-
 
 
 
@@ -50,7 +50,7 @@ const app = express();
 // Conexion DB
 try {
         // string de Conexion
-        await mongoose.connect('mongodb+srv://Glagrotteria:oaRHHBM4KzeYZAZI@eccomerce.62qj1ur.mongodb.net/eccomerce?retryWrites=true&w=majority');
+        await mongoose.connect(configs.mongoUrl);
         console.log("conectado")
 } catch (error) {
         console.log("conexion fallida")
@@ -85,7 +85,7 @@ app.use(session({
                ttl: 3600    
         }),
         name: 'te odio cookie maldita',
-        secret: 'c0d3rS3cr3tC0d',
+        secret: configs.secretCookie,
         resave: true,
         saveUninitialized: true
 }));
@@ -106,7 +106,7 @@ app.use('/api/chat', chatRouter);
 app.use('/api/sessions', sessionRouter);
 
 
-const server = app.listen(8080, () => console.log('listening en 8080'));
+const server = app.listen(configs.port, () => console.log('listening en 8080'));
 
 // IO
 
