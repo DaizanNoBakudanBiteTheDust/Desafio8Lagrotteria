@@ -61,7 +61,7 @@ const saveProductOnCart = async (req, res) => {
         }
 
         const products = cart.products;
-
+        console.log (products);
 
         // Buscar el producto en el carrito por el ID del producto
         const existingProduct = products.find(p => p.product._id.toString() === pid);

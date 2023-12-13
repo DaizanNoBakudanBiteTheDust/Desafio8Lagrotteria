@@ -8,39 +8,39 @@ const getAllCarts = async () => {
     return carts;
 }
 
-const saveCart = async () => {
-    const saveCarts = await manager.save();
+const saveCart = async (cart) => {
+    const saveCarts = await manager.save(cart);
 
     return saveCarts;
 }
 
-const cartUpdate = async () => {
-    const updateCarts = await manager.update();
+const cartUpdate = async (id, cart) => {
+    const updateCarts = await manager.update(id, cart);
 
     return updateCarts;
 }
 
-const cartDelete = async () => {
-    const deleteCarts = await manager.delete();
+const cartDelete = async (id, cart) => {
+    const deleteCarts = await manager.delete(id, cart);
 
     return deleteCarts;
 }
 
-const cartById = async () => {
-    const idCarts = await manager.getCartById();
+const cartById = async (id) => {
+    const idCarts = await manager.getCartById(id);
 
     return idCarts;
 }
 
-const cartProductId = async () => {
-    const productCarts = await manager.getProductById();
+const cartProductId = async (id) => {
+    const productCarts = await manager.getProductById(id);
 
     return productCarts;
 }
 
 
-const cartDeleteProduct = async () => {
-    const deleteProductCarts = await manager.deleteProductById();
+const cartDeleteProduct = async (id, cart) => {
+    const deleteProductCarts = await manager.deleteProductById(id, cart);
 
     return deleteProductCarts;
 }

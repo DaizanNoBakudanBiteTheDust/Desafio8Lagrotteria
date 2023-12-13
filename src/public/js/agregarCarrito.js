@@ -6,6 +6,8 @@ async function addProduct(pid, cartId) {
          // Realiza la solicitud al servidor para obtener el carrito
          const response = await fetch(`/api/carts/${cartId}`);
 
+         console.log(response);
+
          if (!response.ok) {
             
              throw new Error('Error en la solicitud al servidor');
